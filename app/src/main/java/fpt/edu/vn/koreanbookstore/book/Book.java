@@ -1,13 +1,13 @@
-package fpt.edu.vn.koreanbookstore;
+package fpt.edu.vn.koreanbookstore.book;
 
 public class Book {
     private int imageResId;
     private String title;
-    private String price;
+    private int price;
     private String description;
     private String author;
     private String id;
-    public Book(int imageResId, String title, String price, String description, String id, String author) {
+    public Book(int imageResId, String title, int price, String description, String id, String author) {
         this.imageResId = imageResId;
         this.title = title;
         this.price = price;
@@ -24,7 +24,7 @@ public class Book {
         return title;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
