@@ -13,6 +13,12 @@
         android:theme="@style/Theme.KoreanBookStore"
         tools:targetApi="31">
         <activity
+            android:name=".cart.Cart"
+            android:exported="false" />
+        <activity
+            android:name=".book.DetailBook"
+            android:exported="false" />
+        <activity
             android:name=".LayoutScreen"
             android:exported="true">
             <intent-filter>
@@ -33,11 +39,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 
