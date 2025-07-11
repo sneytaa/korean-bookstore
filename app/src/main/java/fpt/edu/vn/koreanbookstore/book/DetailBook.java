@@ -89,7 +89,9 @@ public class DetailBook extends AppCompatActivity {
             tvPrice.setText("Lỗi giá");
         }
 
-        Book book = new Book(imageResId, title, price, description, "", author);
+        String id = intent.getStringExtra("id");
+        String categoryId = intent.getStringExtra("categoryId");
+        Book book = new Book(imageResId, title, price, description, id, author, categoryId);
         Button btnAddCart = findViewById(R.id.btn_add_cart);
         btnAddCart.setOnClickListener(v -> {
             CartItem item = new CartItem(

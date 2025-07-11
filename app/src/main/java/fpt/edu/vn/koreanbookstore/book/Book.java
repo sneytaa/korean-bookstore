@@ -7,13 +7,15 @@ public class Book {
     private String description;
     private String author;
     private String id;
-    public Book(int imageResId, String title, int price, String description, String id, String author) {
+    private String categoryId;
+    public Book(int imageResId, String title, int price, String description, String id, String author, String categoryId) {
         this.imageResId = imageResId;
         this.title = title;
         this.price = price;
         this.description = description;
         this.id = id;
         this.author = author;
+        this.categoryId = categoryId;
     }
 
     public int getImageResId() {
@@ -38,5 +40,13 @@ public class Book {
 
     public String getId() {
         return id;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }
