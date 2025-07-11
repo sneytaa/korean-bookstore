@@ -63,6 +63,19 @@ public class LayoutScreen extends AppCompatActivity {
             return insets;
         });
 
-        bottomNav.setSelectedItemId(R.id.nav_home);
+        String destination = getIntent().getStringExtra("navigateTo");
+
+        if ("cart".equals(destination)) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Cart())
+                    .commit();
+            bottomNav.setSelectedItemId(R.id.nav_cart);
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new UserHome())
+                    .commit();
+            bottomNav.setSelectedItemId(R.id.nav_home);
+        }
+
     }
 }
