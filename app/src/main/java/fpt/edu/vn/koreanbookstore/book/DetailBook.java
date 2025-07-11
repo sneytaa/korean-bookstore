@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import fpt.edu.vn.koreanbookstore.LayoutScreen;
 import fpt.edu.vn.koreanbookstore.cart.CartItem;
 import fpt.edu.vn.koreanbookstore.cart.CartManager;
 import fpt.edu.vn.koreanbookstore.Fragment.Cart;
@@ -91,18 +92,17 @@ public class DetailBook extends AppCompatActivity {
         Book book = new Book(imageResId, title, price, description, "", author);
         Button btnAddCart = findViewById(R.id.btn_add_cart);
         btnAddCart.setOnClickListener(v -> {
-            // Tạo đối tượng CartItem từ Book
             CartItem item = new CartItem(
                     imageResId,
                     title,
-                    price,                // originalPrice
-                    1,                    // quantity mặc định = 1
-                    price * 80 / 100,     // discountedPrice (giảm 20%)
-                    true,                 // isChecked mặc định = true
-                    calendar.getTime()    // ngày giao hàng
+                    price,
+                    1,
+                    price * 80 / 100,
+                    true,
+                    calendar.getTime()
             );
 
-            CartManager.addToCart(item); // sửa thành CartItem
+            CartManager.addToCart(item);
             Toast.makeText(DetailBook.this, "Đã thêm vào giỏ", Toast.LENGTH_SHORT).show();
             invalidateOptionsMenu();
         });
@@ -136,23 +136,17 @@ public class DetailBook extends AppCompatActivity {
         actionView.setOnClickListener(v -> onOptionsItemSelected(menuItem));
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_cart) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.cart_container, new Cart())
-                    .addToBackStack(null)
-                    .commit();
-
-            // Ẩn layout chính, hiện cart fragment
-            findViewById(R.id.main).setVisibility(View.GONE);
-            findViewById(R.id.cart_container).setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, LayoutScreen.class);
+            intent.putExtra("navigateTo", "cart");
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         if (findViewById(R.id.cart_container).getVisibility() == View.VISIBLE) {

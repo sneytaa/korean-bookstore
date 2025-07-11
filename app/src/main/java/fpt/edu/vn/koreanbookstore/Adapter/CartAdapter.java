@@ -1,5 +1,6 @@
 package fpt.edu.vn.koreanbookstore.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import androidx.core.content.ContextCompat;
@@ -21,12 +22,18 @@ import fpt.edu.vn.koreanbookstore.R;
 import fpt.edu.vn.koreanbookstore.cart.CartItem;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    private final Context context;
-    private final List<CartItem> cartItems;
+    private Context context;
+    private List<CartItem> cartItems;
+    private OnCartChangedListener listener;
 
-    public CartAdapter(Context context, List<CartItem> cartItems) {
+    public interface OnCartChangedListener {
+        void onCartChanged();
+    }
+
+    public CartAdapter(Context context, List<CartItem> cartItems, OnCartChangedListener listener) {
         this.context = context;
         this.cartItems = cartItems;
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,8 +53,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.tvDiscountedPrice.setText(item.getDiscountedPrice() + "₫");
         holder.tvQuantity.setText(String.valueOf(item.getQuantity()));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("오늘(M/d,EEE) 도착", Locale.KOREA);
-        holder.tvDelivery.setText(sdf.format(item.getDeliveryDate()));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM (EEEE)", new Locale("vi", "VN"));
+        String formattedDate = sdf.format(item.getDeliveryDate());
+        holder.tvDelivery.setText("Nhận hàng vào " + formattedDate);
+
 
         holder.btnRemove.setOnClickListener(v -> {
             cartItems.remove(position);
@@ -58,24 +67,51 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.btnIncrease.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
             notifyItemChanged(position);
+            listener.onCartChanged();
+
         });
 
         holder.btnDecrease.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.setQuantity(item.getQuantity() - 1);
                 notifyItemChanged(position);
+                listener.onCartChanged();
+
             }
         });
 
-        holder.btnChoose.setImageResource(R.drawable.ic_tick);
-        holder.btnChoose.setColorFilter(
-                ContextCompat.getColor(context, item.isChecked() ? R.color.bluemain : R.color.pinkmain),
-                PorterDuff.Mode.SRC_IN
-        );
+        if (item.isChecked()) {
+            holder.btnChoose.setImageResource(R.drawable.ic_ticked);
+            holder.btnChoose.setColorFilter(
+                    ContextCompat.getColor(context, R.color.bluemain),
+                    PorterDuff.Mode.SRC_IN
+            );
+        } else {
+            holder.btnChoose.setImageResource(R.drawable.ic_tick);
+            holder.btnChoose.setColorFilter(
+                    ContextCompat.getColor(context, R.color.pinkmain1),
+                    PorterDuff.Mode.SRC_IN
+            );
+        }
 
         holder.btnChoose.setOnClickListener(v -> {
             item.setChecked(!item.isChecked());
             notifyItemChanged(position);
+            listener.onCartChanged();
+
+        });
+        holder.btnRemove.setOnClickListener(v -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("Xóa sách")
+                    .setMessage("Bạn có chắc muốn xóa sách này khỏi giỏ?")
+                    .setPositiveButton("Xóa", (dialog, which) -> {
+                        cartItems.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, cartItems.size());
+                        listener.onCartChanged();
+                    })
+                    .setNegativeButton("Hủy", null)
+                    .show();
         });
     }
 

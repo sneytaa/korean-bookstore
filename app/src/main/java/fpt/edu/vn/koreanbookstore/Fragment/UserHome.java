@@ -1,5 +1,6 @@
 package fpt.edu.vn.koreanbookstore.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +24,7 @@ import fpt.edu.vn.koreanbookstore.Adapter.BannerAdapter;
 import fpt.edu.vn.koreanbookstore.Adapter.BookAdapter;
 import fpt.edu.vn.koreanbookstore.book.Book;
 import fpt.edu.vn.koreanbookstore.R;
+import fpt.edu.vn.koreanbookstore.chat.Chat;
 
 public class UserHome extends Fragment {
     private ViewPager2 bannerViewPager;
@@ -29,12 +32,19 @@ public class UserHome extends Fragment {
     private Runnable bannerRunnable;
     private int currentBannerIndex = 0;
     private RecyclerView popularBooksRecycler, parentingsRecycler, comicsRecycler, novelsRecycler;
+    private ImageView btnChat;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_home, container, false);
+
+        btnChat = view.findViewById(R.id.btn_chat);
+        btnChat.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), Chat.class);
+            startActivity(intent);
+        });
 
         bannerViewPager = view.findViewById(R.id.banner_view_pager);
 
