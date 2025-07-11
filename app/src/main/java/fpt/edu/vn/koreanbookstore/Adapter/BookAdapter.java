@@ -41,8 +41,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.imgBook.setImageResource(book.getImageResId());
 
         String title = book.getTitle();
-        if (title.length() > 7) {
-            title = title.substring(0, 7) + "...";
+        if (title.length() > 6) {
+            title = title.substring(0, 6) + "...";
         }
         holder.tvTitle.setText(title);
         holder.tvAuthor.setText(book.getAuthor());

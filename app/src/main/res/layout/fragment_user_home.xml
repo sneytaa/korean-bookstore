@@ -25,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="12dp"
-                android:layout_marginBottom="10dp">
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -40,9 +40,9 @@
                         android:id="@+id/tv_welcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:text="Xin chào"
                         android:textColor="@color/white"
-                        android:layout_marginRight="5dp"
                         android:textSize="20sp" />
 
                     <TextView
@@ -62,7 +62,6 @@
                     android:src="@drawable/ic_mess" />
             </LinearLayout>
 
-
             <EditText
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
@@ -71,7 +70,28 @@
                 android:background="@drawable/bg_search"
                 android:drawableStart="@drawable/ic_search"
                 android:hint="Tìm kiếm bất cứ cái gì..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:paddingStart="12dp" />
+
+            <TextView
+                android:id="@+id/tv_not_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Không tìm thấy kết quả"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:padding="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+
 
         </LinearLayout>
 
@@ -110,6 +130,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/category_novels"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -129,6 +150,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_comics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -148,6 +170,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_parentings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -167,6 +190,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_languages"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -186,6 +210,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_childs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -205,6 +230,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_unibook"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -224,6 +250,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/category_old"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"

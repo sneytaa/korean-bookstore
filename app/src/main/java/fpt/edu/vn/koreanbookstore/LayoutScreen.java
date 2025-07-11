@@ -6,15 +6,13 @@ import android.view.MenuItem;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fpt.edu.vn.koreanbookstore.Fragment.Cart;
-import fpt.edu.vn.koreanbookstore.Fragment.Category;
+import fpt.edu.vn.koreanbookstore.Fragment.CategoryFragment;
 import fpt.edu.vn.koreanbookstore.Fragment.Notify;
 import fpt.edu.vn.koreanbookstore.Fragment.Settings;
 import fpt.edu.vn.koreanbookstore.Fragment.UserHome;
@@ -37,7 +35,7 @@ public class LayoutScreen extends AppCompatActivity {
                 if (itemId == R.id.nav_home) {
                     selectedFragment = new UserHome();
                 } else if (itemId == R.id.nav_category) {
-                    selectedFragment = new Category();
+                    selectedFragment = new CategoryFragment();
                 } else if (itemId == R.id.nav_notify) {
                     selectedFragment = new Notify();
                 } else if (itemId == R.id.nav_cart) {
